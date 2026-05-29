@@ -4,54 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="FX予想">
-<meta name="theme-color" content="#2563eb">
+<meta name="theme-color" content="#0a1628">
+<link rel="apple-touch-icon" href="icon.png">
 <title>FX予想アプリ</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,sans-serif;background:#f1f5f9;padding-bottom:40px;}
-.wrap{max-width:480px;margin:0 auto;padding:1.25rem 1rem;}
-.header{background:linear-gradient(135deg,#2563eb,#1d4ed8);border-radius:16px;padding:1.25rem;margin-bottom:12px;color:#fff;}
-.title{font-size:22px;font-weight:700;}
-.subtitle{font-size:12px;opacity:.8;margin-top:4px;}
-.section{background:#fff;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.07);}
-.slabel{font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
-.btn-row{display:flex;flex-wrap:wrap;gap:8px;}
-.btn{padding:8px 15px;border-radius:8px;border:1.5px solid #e5e7eb;background:#fff;color:#374151;font-size:14px;cursor:pointer;}
-.btn.active{border-color:#2563eb;background:#eff6ff;color:#2563eb;font-weight:600;}
-.predict-btn{width:100%;padding:18px;border-radius:14px;border:none;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-size:17px;font-weight:700;cursor:pointer;margin-bottom:12px;}
-.sel{background:#eff6ff;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#2563eb;font-weight:500;text-align:center;}
-.box{background:#fff;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.07);}
-.step{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f3f4f6;}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0a1628;min-height:100vh;padding-bottom:40px;}
+.splash{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;}
+.app-icon{width:120px;height:120px;border-radius:27px;box-shadow:0 8px 32px rgba(0,0,0,.5);margin-bottom:1.5rem;}
+.app-name{font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:6px;}
+.app-sub{font-size:14px;color:#94a3b8;margin-bottom:2.5rem;text-align:center;line-height:1.6;}
+.install-card{background:#1e2d4a;border-radius:20px;padding:1.5rem;width:100%;max-width:360px;margin-bottom:1.5rem;}
+.install-title{font-size:13px;font-weight:700;color:#64748b;letter-spacing:.07em;text-transform:uppercase;margin-bottom:1rem;}
+.step{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #2a3f5f;}
 .step:last-child{border-bottom:none;}
-.snum{width:26px;height:26px;border-radius:50%;background:#2563eb;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.stxt{font-size:13px;color:#374151;line-height:1.6;padding-top:3px;}
-.pbox{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px;margin-top:10px;font-size:12px;color:#475569;line-height:1.7;word-break:break-all;}
-.cbtn{width:100%;padding:10px;border-radius:8px;border:1.5px solid #2563eb;background:#fff;color:#2563eb;font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;}
-.obtn{width:100%;padding:14px;border-radius:12px;border:none;background:#10b981;color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;}
-.irow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f3f4f6;font-size:13px;}
-.irow:last-child{border-bottom:none;}
+.step-icon{font-size:24px;width:34px;text-align:center;flex-shrink:0;}
+.step-text{font-size:14px;color:#cbd5e1;line-height:1.6;padding-top:2px;}
+.step-text b{color:#fff;}
+.arrow-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;margin:1rem 0;}
+.arrow{font-size:40px;animation:bounce 1.5s infinite;}
+.arrow-text{font-size:12px;color:#475569;text-align:center;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.open-btn{width:100%;max-width:360px;padding:16px;border-radius:14px;border:none;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(37,99,235,.4);margin-top:1rem;}
+.note{margin-top:1.5rem;font-size:11px;color:#1e3a5f;text-align:center;max-width:300px;line-height:1.6;}
 </style>
 </head>
 <body>
-<div class="wrap">
-<div class="header"><div class="title">FX予想アプリ</div><div class="subtitle">要人発言・ニュース・経済指標をAIが分析</div></div>
-<div class="section"><div class="slabel">通貨ペア</div><div class="btn-row" id="pr"><button class="btn active" onclick="sp('USD/JPY',this)">USD/JPY</button><button class="btn" onclick="sp('EUR/USD',this)">EUR/USD</button><button class="btn" onclick="sp('GBP/JPY',this)">GBP/JPY</button><button class="btn" onclick="sp('EUR/JPY',this)">EUR/JPY</button><button class="btn" onclick="sp('AUD/USD',this)">AUD/USD</button><button class="btn" onclick="sp('USD/CHF',this)">USD/CHF</button></div></div>
-<div class="section"><div class="slabel">予想期間</div><div class="btn-row" id="hr"><button class="btn active" onclick="sh('短期',this)">短期</button><button class="btn" onclick="sh('中期',this)">中期</button><button class="btn" onclick="sh('長期',this)">長期</button></div></div>
-<div class="sel" id="si">USD/JPY / 短期</div>
-<button class="predict-btn" onclick="gen()">AI予想プロンプトを生成する</button>
-<div id="pa" style="display:none"><div class="box"><div class="slabel">生成されたプロンプト</div><div class="pbox" id="pt"></div><button class="cbtn" onclick="cp()">プロンプトをコピー</button><button class="obtn" onclick="oc()">Claude.aiを開く</button></div></div>
-<div class="box"><div class="slabel">使い方</div><div class="step"><div class="snum">1</div><div class="stxt">通貨ペアと期間を選んでボタンを押す</div></div><div class="step"><div class="snum">2</div><div class="stxt">プロンプトをコピーしてClaude.aiを開く</div></div><div class="step"><div class="snum">3</div><div class="stxt">チャットにペーストして送信するとAI予想が表示される</div></div></div>
-<div class="box"><div class="irow"><span>完全無料・APIキー不要</span></div><div class="irow"><span>トランプ発言・FRB・日銀などの要人発言を分析</span></div><div class="irow"><span>最新経済指標・ニュースを含む</span></div></div>
+<div class="splash">
+  <img class="app-icon" src="icon.png" alt="FX予想">
+  <div class="app-name">FX予想アプリ</div>
+  <div class="app-sub">要人発言・ニュース・経済指標を<br>AIがリアルタイム分析</div>
+  <div class="install-card">
+    <div class="install-title">📱 ホーム画面に追加する方法</div>
+    <div class="step"><div class="step-icon">1️⃣</div><div class="step-text">iPhoneの <b>Safari</b> でこのページを開く</div></div>
+    <div class="step"><div class="step-icon">2️⃣</div><div class="step-text">画面下の <b>共有ボタン（□↑）</b> をタップ</div></div>
+    <div class="step"><div class="step-icon">3️⃣</div><div class="step-text"><b>「ホーム画面に追加」</b> をタップ</div></div>
+    <div class="step"><div class="step-icon">4️⃣</div><div class="step-text">右上の <b>「追加」</b> をタップして完了！</div></div>
+  </div>
+  <div class="arrow-wrap">
+    <div class="arrow">👇</div>
+    <div class="arrow-text">Safariの共有ボタンをタップ</div>
+  </div>
+  <button class="open-btn" onclick="window.location.href='https://claude.ai'">🤖 Claude AIで今すぐ予想を見る</button>
+  <div class="note">※ このアプリはClaude AIと連携しています<br>※ 投資判断はご自身の責任で行ってください</div>
 </div>
-<script>
-let pair='USD/JPY',horizon='短期',cur='';
-function sp(p,b){pair=p;document.querySelectorAll('#pr .btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');up();}
-function sh(h,b){horizon=h;document.querySelectorAll('#hr .btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');up();}
-function up(){document.getElementById('si').textContent=pair+' / '+horizon;}
-function gen(){const n=new Date();cur=n.toLocaleDateString('ja-JP')+' '+n.toLocaleTimeString('ja-JP')+'時点での'+pair+'の'+horizon+'のFX予想をしてください。必ずWeb検索して以下を調査してください：1.'+pair+'の現在価格BID・ASK 2.トランプ大統領・FRB・日銀などの要人発言 3.最新経済指標 4.重要ニュース。現在価格・予想方向・目標レンジ・ニュース影響・総合分析・リスク要因を含めて答えてください。';document.getElementById('pt').textContent=cur;document.getElementById('pa').style.display='block';document.getElementById('pa').scrollIntoView({behavior:'smooth'});}
-function cp(){navigator.clipboard.writeText(cur).then(()=>{const b=document.querySelector('.cbtn');b.textContent='コピーしました！';setTimeout(()=>b.textContent='プロンプトをコピー',2000);});}
-function oc(){window.open('https://claude.ai','_blank');}
-</script>
 </body>
 </html>
